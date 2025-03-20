@@ -1,0 +1,14 @@
+Giraffe
+Alligator
+Elephant
+Kangaroo
+Sloth
+Hedgehog
+Meerkat
+Toucan
+Zebra
+Jellyfish
+Salamander
+Koala
+Chameleon
+Hippopotamus
