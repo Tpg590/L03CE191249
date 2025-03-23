@@ -75,6 +75,51 @@ public class Word {
     }
 
     /**
+     * Reads words from a file and stores them in a single string separated by
+     * '@'. If the file does not exist, an error message is displayed.
+     *
+     * @param filePath The path of the file to be read.
+     */
+    public void showInfo(String filePath) {
+        try {
+            // Create a File object with the specified path
+            File file = new File(filePath);
+
+            // Open the file for reading
+            FileInputStream fileInputStream = new FileInputStream(file);
+            Scanner sc = new Scanner(fileInputStream); // Scanner object to read file content
+            boolean isEmpty = false; // File empty = true.
+            // Read each line of the file and append it to strWord with '@' as a separator
+            while (sc.hasNextLine()) {
+                this.strWord += sc.nextLine() + "@";
+            }
+            if (this.strWord.isEmpty()) { // File empty true 
+                isEmpty = true;
+            }
+            if (isEmpty) { // Display file empty
+                System.out.println("This File is empty!");
+                return; // return menu
+            }
+            // Check if the file does not exist (this check is redundant since we already opened it)
+            if (!file.exists()) {
+                System.out.println("The file not found!"); // Display error message
+                return; // Exit method
+            } else {
+                getWordToList(); // Convert the concatenated string into a list
+
+            }
+        } catch (Exception e) {
+            System.out.println("The file not found!"); // Handle any errors in file reading
+        }
+    }
+
+    public void getInfo() {
+        for (int i = 1; i < listWords.length; i++) { // show out info of file
+            System.out.println(listWords[i]); // show out
+        }
+    }
+
+    /**
      * Splits the strWord string using '@' and stores the words in the listWords
      * array.
      */

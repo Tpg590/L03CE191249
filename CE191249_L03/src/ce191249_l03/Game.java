@@ -34,12 +34,13 @@ public class Game {
 
 // Array to store words for custom topics
     private String[] array;
-
+    
 // Array to storage name of file.
     private ArrayList<String> newFileName = new ArrayList<>();
 
 // File to store custom topic names
     private final String CUSTOM_TOPICS_FILE = "custom_topics.txt";
+    
 
     /**
      * Displays the menu options for the user.
@@ -48,7 +49,8 @@ public class Game {
         System.out.println("         MENU"); // Print menu title
         System.out.println("1. Choice Topic And Play."); // Option 1: Choose a topic and play
         System.out.println("2. Custom New Topic."); // Option 2: Create a new custom topic
-        System.out.println("3. Exit."); // Option 3: Exit the program
+        System.out.println("3. Information."); // Option 3: Exit the program
+        System.out.println("4. Exit."); // Option 3: Exit the program
     }
 
     /**
@@ -56,6 +58,7 @@ public class Game {
      * functionality.
      */
     public void choice() {
+        getWord.showInfo("guide.txt");
         loadCustomTopics(); // load custom topic file name.
         miniLoop = true; // Reset the loop flag
         while (miniLoop) { // Start loop to keep showing the menu until exit
@@ -68,7 +71,7 @@ public class Game {
                 continue; // Continue loop
             }
 
-            if (checkInput(choice, "Enter 1-3", "[1-3]+")) { // Validate input (must be 1-3)
+            if (checkInput(choice, "Enter 1-4", "[1-4]+")) { // Validate input (must be 1-3)
                 continue; // If invalid, continue loop
             }
 
@@ -82,6 +85,9 @@ public class Game {
                     miniLoop = true; // Continue looping
                     break;
                 case "3":
+                    getWord.getInfo();
+                    break;
+                case "4":
                     miniLoop = false;
                     break;
             }
@@ -138,6 +144,7 @@ public class Game {
             }
             fileName = fileName + ".txt"; // Append .txt extension
             getWord.word(fileName); // Load the word file
+            
             miniLoop = false; // Exit loop
         }
     }
@@ -147,73 +154,74 @@ public class Game {
      */
     public void customNewTopic() {
         miniLoop = true;
-        while (miniLoop) {
-            System.out.println("Enter number of words for the new Topic:");
-            String numberWords = sc.nextLine().trim(); // Read input
 
-            if (numberWords.length() > 1) { // Limit topic to max 9 words
-                System.out.println("New Game can only create 9 words.");
-                continue;
-            }
+        while (miniLoop) { // Loop to enter topic name
+            System.out.println("Enter topic name:");
+            String input = sc.nextLine().trim().toLowerCase();
 
-            if (numberWords.isEmpty()) { // Check if input is empty
+            if (input.isEmpty()) { // Ensure input is not empty
                 System.out.println("Can't be enter empty");
                 continue;
             }
 
-            if (checkInput(numberWords, "Can be only enter number", "[0-9]+")) { // Ensure input is numeric
+            if (checkInput(input, "Can be only enter characters", "[a-zA-Z]+")) { // Validate topic name
                 continue;
             }
-            if (Integer.parseInt(numberWords) < 1) { // Check if this number below 0 throw warrning and allow user enter again.
-                System.out.println("Can't be enter 0 please enter again.");
+            String register; // Declare Register to storage file name
+            register = input; // Storage file name
+            input = input + ".txt"; // Append .txt extension
+
+            File file = new File(input); // Create File object
+            boolean isExists = false;
+            if (file.exists()) { // Check if file already exists
+                System.out.println("This file already exists");
+                isExists = true;
                 continue;
             }
-            array = new String[Integer.parseInt(numberWords)]; // Create array for words
+            if (!isExists) {
+                newFileName.add(register); // add file name in to array to show out
+                saveCustomTopics(); // Save topic names after adding a new one
+            }
+            while (miniLoop) {
+                System.out.println("Enter number of words for the new Topic:");
+                String numberWords = sc.nextLine().trim(); // Read input
 
-            for (int i = 0; i < array.length; i++) { // Loop to enter words
-                while (true) {
-                    System.out.printf("Enter word %d: ", i + 1);
-                    array[i] = sc.nextLine().trim().toLowerCase();
-
-                    if (array[i].isEmpty()) { // Ensure input is not empty
-                        System.out.println("Can't be enter empty");
-                        continue;
-                    }
-
-                    if (checkInput(array[i], "Can be only enter characters", "[a-zA-Z ]+")) { // Validate input
-                        continue;
-                    }
-                    break; // Exit inner loop if valid
+                if (numberWords.length() > 1) { // Limit topic to max 9 words
+                    System.out.println("New Game can only create 9 words.");
+                    continue;
                 }
-            }
 
-            while (miniLoop) { // Loop to enter topic name
-                System.out.println("Enter topic name:");
-                String input = sc.nextLine().trim().toLowerCase();
-
-                if (input.isEmpty()) { // Ensure input is not empty
+                if (numberWords.isEmpty()) { // Check if input is empty
                     System.out.println("Can't be enter empty");
                     continue;
                 }
 
-                if (checkInput(input, "Can be only enter characters", "[a-zA-Z]+")) { // Validate topic name
+                if (checkInput(numberWords, "Can be only enter number", "[0-9]+")) { // Ensure input is numeric
                     continue;
                 }
-                String register; // Declare Register to storage file name
-                register = input; // Storage file name
-                input = input + ".txt"; // Append .txt extension
+                if (Integer.parseInt(numberWords) < 1) { // Check if this number below 0 throw warrning and allow user enter again.
+                    System.out.println("Can't be enter 0 please enter again.");
+                    continue;
+                }
+                array = new String[Integer.parseInt(numberWords)]; // Create array for words
 
-                File file = new File(input); // Create File object
-                boolean isExists = false;
-                if (file.exists()) { // Check if file already exists
-                    System.out.println("This file already exists");
-                    isExists = true;
-                    continue;
+                for (int i = 0; i < array.length; i++) { // Loop to enter words
+                    while (true) {
+                        System.out.printf("Enter word %d: ", i + 1);
+                        array[i] = sc.nextLine().trim().toLowerCase();
+
+                        if (array[i].isEmpty()) { // Ensure input is not empty
+                            System.out.println("Can't be enter empty");
+                            continue;
+                        }
+
+                        if (checkInput(array[i], "Can be only enter characters", "[a-zA-Z ]+")) { // Validate input
+                            continue;
+                        }
+                        break; // Exit inner loop if valid
+                    }
                 }
-                if (!isExists) {
-                    newFileName.add(register); // add file name in to array to show out
-                    saveCustomTopics(); // Save topic names after adding a new one
-                }
+
                 createNewFile(input); // Create new file
 
                 miniLoop = false; // Exit loop
@@ -271,6 +279,7 @@ public class Game {
         }
     }
 
+    
     /**
      * Loads custom topic names from a file.
      */
