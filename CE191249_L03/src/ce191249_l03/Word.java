@@ -213,7 +213,11 @@ public class Word {
                     }
                 } else { // If the guessed letter is not in the word
                     System.out.println(letter + " is not present in the word.");
-                    wrong++; // Increment wrong guess count
+                    if (guessescontainsguess) {
+                        continue;
+                    } else {
+                        wrong++; // Increment wrong guess count
+                    }
                 }
 
                 guess_++; // Increment total guess count

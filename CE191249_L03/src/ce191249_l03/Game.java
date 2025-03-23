@@ -58,7 +58,7 @@ public class Game {
      * functionality.
      */
     public void choice() {
-        getWord.showInfo("guide.txt");
+        getWord.showInfo("guide1.txt");
         loadCustomTopics(); // load custom topic file name.
         miniLoop = true; // Reset the loop flag
         while (miniLoop) { // Start loop to keep showing the menu until exit
