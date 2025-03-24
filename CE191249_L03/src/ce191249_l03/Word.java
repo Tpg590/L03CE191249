@@ -224,6 +224,8 @@ public class Word {
 
         // If the player reaches the maximum wrong guesses, they lose
         if (wrong == 5) {
+            System.out.println("");
+             System.out.println("The word was: " + word);
             System.out.println("YOU LOST! Maximum limit of incorrect guesses reached.");
         } else {
             // If the word is fully guessed, the player wins
