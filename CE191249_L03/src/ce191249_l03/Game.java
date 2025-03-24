@@ -48,7 +48,7 @@ public class Game {
     public void menu() {
         System.out.println("         MENU"); // Print menu title
         System.out.println("1. Choice Topic And Play."); // Option 1: Choose a topic and play
-        System.out.println("2. Custom New Topic."); // Option 2: Create a new custom topic
+        System.out.println("2. Create New Topic."); // Option 2: Create a new custom topic
         System.out.println("3. Information."); // Option 3: Exit the program
         System.out.println("4. Exit."); // Option 3: Exit the program
     }

@@ -45,7 +45,11 @@ public class Word {
         try {
             // Create a File object with the specified path
             File file = new File(filePath);
-
+            // Check if the file does not exist (this check is redundant since we already opened it)
+            if (!file.exists()) {
+                System.out.println("The file not found!"); // Display error message
+                return; // Exit method
+            }
             // Open the file for reading
             FileInputStream fileInputStream = new FileInputStream(file);
             Scanner sc = new Scanner(fileInputStream); // Scanner object to read file content
@@ -60,11 +64,6 @@ public class Word {
             if (isEmpty) { // Display file empty
                 System.out.println("This File is empty!");
                 return; // return menu
-            }
-            // Check if the file does not exist (this check is redundant since we already opened it)
-            if (!file.exists()) {
-                System.out.println("The file not found!"); // Display error message
-                return; // Exit method
             } else {
                 getWordToList(); // Convert the concatenated string into a list
                 getPuzzel(); // Start the puzzle game
@@ -84,7 +83,11 @@ public class Word {
         try {
             // Create a File object with the specified path
             File file = new File(filePath);
-
+            // Check if the file does not exist (this check is redundant since we already opened it)
+            if (!file.exists()) {
+                System.out.println("The file not found!"); // Display error message
+                return; // Exit method
+            }
             // Open the file for reading
             FileInputStream fileInputStream = new FileInputStream(file);
             Scanner sc = new Scanner(fileInputStream); // Scanner object to read file content
@@ -99,11 +102,6 @@ public class Word {
             if (isEmpty) { // Display file empty
                 System.out.println("This File is empty!");
                 return; // return menu
-            }
-            // Check if the file does not exist (this check is redundant since we already opened it)
-            if (!file.exists()) {
-                System.out.println("The file not found!"); // Display error message
-                return; // Exit method
             } else {
                 getWordToList(); // Convert the concatenated string into a list
 
@@ -213,7 +211,7 @@ public class Word {
                     }
                 } else { // If the guessed letter is not in the word
                     System.out.println(letter + " is not present in the word.");
-                    if (guessescontainsguess) {
+                    if (guessescontainsguess) { // if Already guessed and wrong not minus wrong.
                         continue;
                     } else {
                         wrong++; // Increment wrong guess count

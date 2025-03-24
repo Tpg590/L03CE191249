@@ -1,21 +1,35 @@
---------------
-Giới Thiệu:
-Đây là game đoán từ(Hangman)
-Cách chơi:
-Bấm 1 để chọn topic, khi chọn xong topic chúng ta sẽ thấy _ _ _ _ _ _
-độ dài của mỗi gạch sẽ khác nhau tùy theo từ mà hệ thống random.
-Sau khi hiện _ _ _ _ _ người chơi có thể nhập bất kì ký tự nào để đoán nhưng không thể nhập ký tự đặc biệt hoặc số,
-nếu người chơi nhập chuỗi ký tự dài ví dụ "Anh Teo yeu bong da" thì hệ thống chỉ lấy ký tự đầu tiên là A.
-Nếu đoán đúng thì _ _ _ _ sẽ tự động thay thế thành ký tự mà bạn đã đoán đúng.
-Nếu trong 1 từ có 2 ký tự hoặc nhiều hơn trùng nhau ví dụ như D trong ADD thì _ _ _ sẽ được thay thế thành _ D D.
-Mỗi lượt chơi sẽ có 5 lần đoán sai cứ mỗi lần đoán sai thì số lần đó sẽ giảm, còn nếu đoán đúng thì không thay đổi.
-Khi số lần được phép đoán sai giảm xuống về không thì Game Over còn nếu đoán đúng trước khi giảm về không thì Win.
-Cách tạo chủ đề chơi mới:
-Bấm 2 để tạo chủ đề mới, Khi bắt đầu tạo bạn phải nhập tên chủ đề trước.
-Nếu tên chủ đề bị trùng với 1 tên chủ đề đã tạo trước đó hoặc tên chủ đề mặc định của game thì không thể tạo, buộc phải nhập lại tên mới.
-Sau khi nhập tên thành công chúng ta sẽ nhấp số lượng câu hỏi trong chủ đề đó tối thiểu là 1 tối đa là 9.
-Sau khi nhập số lượng xong thì chúng ta sẽ nhập vào chuỗi ký tự để làm câu đoán.
-Sau khi hoàn thành các bước trên thì xin chút mừng bạn đã tạo thành công 1 chủ đề mới của riêng mình.
-About us:
+------------
+Introduction:
+This is a word-guessing game (Hangman).
+
+How to Play:
+
+Press 1 to choose a topic. After selecting a topic, you will see _ _ _ _ _ _.
+The number of underscores varies depending on the randomly chosen word.
+
+After _ _ _ _ _ appears, the player can enter any letter to guess. However, special characters and numbers are not allowed.
+
+If the player enters a long string like "Anh Teo yeu bong da", the system will only take the first letter, "A".
+
+If the guess is correct, _ _ _ _ will automatically be replaced with the guessed letter.
+
+If a word contains multiple occurrences of the guessed letter (e.g., "D" in "ADD"), _ _ _ will be replaced with _ D D.
+
+Each game allows five incorrect guesses. Each incorrect guess decreases the remaining attempts, while correct guesses do not affect the count.
+
+If the number of incorrect guesses reaches zero, it's Game Over. If the player correctly guesses the word before that, they Win.
+
+How to Create a New Topic:
+
+Press 2 to create a new topic. First, you must enter a topic name.
+
+If the topic name is already taken (either from previously created topics or the game's default topics), you must enter a new name.
+
+After successfully naming the topic, enter the number of words (minimum 1, maximum 9).
+
+Then, enter the words that will be used in the guessing game.
+
+Once all steps are completed, congratulations! You have successfully created your own custom topic.
+
+About Us:
 Creator: Lê Thiện Trí
-Can copyright
