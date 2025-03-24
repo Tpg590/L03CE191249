@@ -34,13 +34,12 @@ public class Game {
 
 // Array to store words for custom topics
     private String[] array;
-    
+
 // Array to storage name of file.
     private ArrayList<String> newFileName = new ArrayList<>();
 
 // File to store custom topic names
     private final String CUSTOM_TOPICS_FILE = "custom_topics.txt";
-    
 
     /**
      * Displays the menu options for the user.
@@ -49,8 +48,8 @@ public class Game {
         System.out.println("         MENU"); // Print menu title
         System.out.println("1. Choice Topic And Play."); // Option 1: Choose a topic and play
         System.out.println("2. Create New Topic."); // Option 2: Create a new custom topic
-        System.out.println("3. Information."); // Option 3: Exit the program
-        System.out.println("4. Exit."); // Option 3: Exit the program
+        System.out.println("3. Information."); // Option 3: Show infomation.
+        System.out.println("4. Exit."); // Option 4: Exit the program
     }
 
     /**
@@ -58,7 +57,6 @@ public class Game {
      * functionality.
      */
     public void choice() {
-        getWord.showInfo("guide1.txt");
         loadCustomTopics(); // load custom topic file name.
         miniLoop = true; // Reset the loop flag
         while (miniLoop) { // Start loop to keep showing the menu until exit
@@ -85,9 +83,9 @@ public class Game {
                     miniLoop = true; // Continue looping
                     break;
                 case "3":
-                    getWord.getInfo();
+                    showInformation();
                     break;
-                case "4":
+                case "4": // exit game.
                     miniLoop = false;
                     break;
             }
@@ -144,8 +142,36 @@ public class Game {
             }
             fileName = fileName + ".txt"; // Append .txt extension
             getWord.word(fileName); // Load the word file
-            
+
             miniLoop = false; // Exit loop
+        }
+    }
+
+    /**
+     * Show information when user enter 3
+     */
+    public void showInformation() {
+        System.out.println(""); // create space between menu and information.
+        try {
+            File file = new File("guide1.txt"); // Choice file guide storage information guide1 have number 1 because it make user can choice guide to play game.
+            if (!file.exists()) { // check if user deleted this file. Notice not found will be show when choice. So don't delete this file. 
+                System.out.println("File not found");
+                return;
+            }
+            String[] guide; // Array storage word to show out
+            String word = ""; // String use to get word in file
+            FileInputStream fileInputStream = new FileInputStream(file); // Open file to read
+            Scanner sc = new Scanner(fileInputStream); // Scanner object to read file content
+            while (sc.hasNextLine()) { // Scan file
+                word += sc.nextLine() + "@"; // add information into word with @ between each line to split
+            }
+            guide = word.split("@"); // split @ to space down for each line
+            for (int i = 0; i < guide.length; i++) { // for to show out all information
+                System.out.println(guide[i]); // show information
+
+            }
+        } catch (Exception e) {
+            System.out.println("The file not found!"); // Handle any errors in file reading
         }
     }
 
@@ -279,7 +305,6 @@ public class Game {
         }
     }
 
-    
     /**
      * Loads custom topic names from a file.
      */

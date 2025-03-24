@@ -74,50 +74,6 @@ public class Word {
     }
 
     /**
-     * Reads words from a file and stores them in a single string separated by
-     * '@'. If the file does not exist, an error message is displayed.
-     *
-     * @param filePath The path of the file to be read.
-     */
-    public void showInfo(String filePath) {
-        try {
-            // Create a File object with the specified path
-            File file = new File(filePath);
-            // Check if the file does not exist (this check is redundant since we already opened it)
-            if (!file.exists()) {
-                System.out.println("The file not found!"); // Display error message
-                return; // Exit method
-            }
-            // Open the file for reading
-            FileInputStream fileInputStream = new FileInputStream(file);
-            Scanner sc = new Scanner(fileInputStream); // Scanner object to read file content
-            boolean isEmpty = false; // File empty = true.
-            // Read each line of the file and append it to strWord with '@' as a separator
-            while (sc.hasNextLine()) {
-                this.strWord += sc.nextLine() + "@";
-            }
-            if (this.strWord.isEmpty()) { // File empty true 
-                isEmpty = true;
-            }
-            if (isEmpty) { // Display file empty
-                System.out.println("This File is empty!");
-                return; // return menu
-            } else {
-                getWordToList(); // Convert the concatenated string into a list
-
-            }
-        } catch (Exception e) {
-            System.out.println("The file not found!"); // Handle any errors in file reading
-        }
-    }
-
-    public void getInfo() {
-        for (int i = 1; i < listWords.length; i++) { // show out info of file
-            System.out.println(listWords[i]); // show out
-        }
-    }
-
-    /**
      * Splits the strWord string using '@' and stores the words in the listWords
      * array.
      */
@@ -137,18 +93,18 @@ public class Word {
         word = word.toUpperCase(); // Convert the word to uppercase
 
         // Replace all letters with underscores and separate them with spaces
-        String word1 = word.replaceAll("[A-Z]", "_ ");
+        String wordAfterReplace = word.replaceAll("[A-Z]", "_ ");
 
-        startGame(word, word1); // Call the game logic with the chosen word
+        startGame(word, wordAfterReplace); // Call the game logic with the chosen word
     }
 
     /**
      * Starts the Hangman-style word guessing game.
      *
      * @param word The actual word to be guessed.
-     * @param word1 The word displayed with underscores replacing letters.
+     * @param wordAfterReplace The word displayed with underscores replacing letters.
      */
-    public void startGame(String word, String word1) {
+    public void startGame(String word, String wordAfterReplace) {
         System.out.println("Let's play the game"); // Display game start message
         Scanner sc = new Scanner(System.in); // Create Scanner for user input
         int guess_ = 0; // Counter for the number of guesses
@@ -160,8 +116,8 @@ public class Word {
         boolean guessinword; // Checks if letter is in the word
 
         // Loop until the user reaches the maximum wrong guesses or completes the word
-        while (wrong < 5 && word1.contains("_")) {
-            System.out.println(word1 + "\n"); // Display the current puzzle word
+        while (wrong < 5 && wordAfterReplace.contains("_")) {
+            System.out.println(wordAfterReplace + "\n"); // Display the current puzzle word
             int temp = 5 - wrong; // Calculate remaining attempts
 
             // Display remaining attempts if wrong guesses were made
@@ -189,7 +145,7 @@ public class Word {
 
                 // Check if the guessed letter is in the word
                 guessinword = (word.indexOf(letter)) != -1;
-                System.out.println();
+                System.out.println(); // create space
 
                 // If the letter was already guessed
                 if (guessescontainsguess) {
@@ -201,12 +157,12 @@ public class Word {
                     System.out.println(letter + " is present in the word.\n");
 
                     // Replace underscores with the guessed letter in the correct positions
-                    for (int i = 0; i < word.length(); i++) {
-                        if (word.charAt(i) == letter && word1.charAt(i) != letter) {
-                            word1 = word1.replaceAll("_ ", "_"); // Remove extra spaces for easier replacement
-                            String word2 = word1.substring(0, i) + letter + word1.substring(i + 1);
+                    for (int i = 0; i < word.length(); i++) { 
+                        if (word.charAt(i) == letter && wordAfterReplace.charAt(i) != letter) { // meaning letter i = word i and letter i != wordAfterReplace(letter != "_") code below will be run else run nothing skip.
+                            wordAfterReplace = wordAfterReplace.replaceAll("_ ", "_"); // Remove extra spaces for easier replacement
+                            String word2 = wordAfterReplace.substring(0, i) + letter + wordAfterReplace.substring(i + 1); // 
                             word2 = word2.replaceAll("_", "_ "); // Restore space-separated format
-                            word1 = word2; // Update the word display
+                            wordAfterReplace = word2; // Update the word display
                         }
                     }
                 } else { // If the guessed letter is not in the word
@@ -225,11 +181,11 @@ public class Word {
         // If the player reaches the maximum wrong guesses, they lose
         if (wrong == 5) {
             System.out.println("");
-             System.out.println("The word was: " + word);
+            System.out.println("The word was: " + word); // show word after loose
             System.out.println("YOU LOST! Maximum limit of incorrect guesses reached.");
         } else {
             // If the word is fully guessed, the player wins
-            System.out.println("The word is: " + word1 + "\nWell Played, you did it!!\n");
+            System.out.println("The word is: " + wordAfterReplace + "\nWell Played, you did it!!\n");
         }
     }
 
